@@ -1,30 +1,30 @@
 require 'test_helper'
 
-class Recipe < ActiveSupport::TestCase
+class RecipeTest < ActiveSupport::TestCase
   
   def setup
-    @recipe = Recipe.new(name: "chickenparm", summary:"delicious meal", description:"heat the fat in the pan, add chicken and sauce")
+    @recipe = Recipe.new(name: "meatballs", description: "roll into balls, cook meat", summary: "best meatballs")
   end
   
   test "recipe should be valid" do
     assert @recipe.valid?
   end
   
-  test "name should be present" do
+  test "recipe name should be valid" do
     @recipe.name = " "
     assert_not @recipe.valid?
   end
   
-  test "name length should not be too long" do
+  test "name should not be too long" do
     @recipe.name = "a" * 101
     assert_not @recipe.valid?
   end
   
-  test "name length should not be too short" do
+  test "name should not be too short" do
     @recipe.name = "aaaa"
-    assert_not  @recipe.valid?
+    assert_not @recipe.valid?
   end
-
+  
   test "summary should be present" do
     @recipe.summary = " "
     assert_not @recipe.valid?
@@ -45,14 +45,14 @@ class Recipe < ActiveSupport::TestCase
     assert_not @recipe.valid?
   end
   
-  test "description should not be too long" do
+  test "description is not too long" do
     @recipe.description = "a" * 501
     assert_not @recipe.valid?
   end
   
-  test "description should not be too short" do
-    @recipe.description = "a" * 19
+  test "description is not too short" do
+    @recipe.description = "a" * 9
+    assert_not @recipe.valid?
   end
-  
   
 end
