@@ -1,4 +1,4 @@
-<%= render 'shared/page_title', title: "All Recipes" %>
+<%= render 'shared/page_title', title: "Recipes for : " + @ingredient.name  %>
 
 <ul class="nav nav-tabs">
   <li class="active">
@@ -8,9 +8,9 @@
     <%= link_to "Chefs", chefs_path %>
   </li>
 </ul>
-<%= will_paginate %>
+<%= will_paginate @recipes %>
 
-<% @recipes.each do |recipe| %>
+<% @ingredient.recipes.each do |recipe| %>
   <div class="row">
     <div class="col-md-2">
       <section class="chef_info center">
@@ -37,7 +37,7 @@
           <i class="glyphicon glyphicon-thumbs-down"></i> &nbsp <%= recipe.thumbs_down_total %>
         <% end %>
       </div>
-      
+       
     </div>
     <div class="col-md-4">
       <%= image_tag(recipe.picture.url, size: "250x150", class: "gravatar") if recipe.picture? %>
@@ -47,4 +47,4 @@
   <hr/>
 <% end %>
 
-<%= will_paginate %>
+<%= will_paginate @recipes %>
